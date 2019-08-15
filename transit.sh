@@ -136,13 +136,7 @@ cyberway_download_genesis() {
     local genesis_data_url=$(curl --silent $CYBER_LAUNCH_URL'/genesis-data.link')
 
     curl $CYBER_LAUNCH_URL'/genesis.json'  --output $CYBER_GENESIS'/genesis.json'
-    curl "$genesis_data_url" --output "$CYBER_GENESIS/genesis.tar.bz2"
-
-    (
-        cd $CYBER_GENESIS
-        tar -xvf genesis.tar.bz2
-        rm -f genesis.tar.bz2
-    )
+    curl "$genesis_data_url" --output "$CYBER_GENESIS/genesis.dat"
 }
 
 convert_username_to_account() {
