@@ -8,6 +8,31 @@ The current CyberWay version: [v2.0.1](https://github.com/cyberway/cyberway/rele
 
 Clone this repository and run `./start_light.sh`
 
+# Upgrade from v2.0.0 to v2.0.1
+
+1. Download the docker image `cyberway/cyberway:v2.0.1`:
+```
+sudo docker pull cyberway/cyberway:v2.0.1
+```
+
+2. In the file `/var/lib/cyberway/docker-compose.yml` update the version number of the `nodeos` container from `v2.0.0` to `v2.0.1`:
+```
+sudo sed -i 's|cyberway/cyberway:v2.0.0|cyberway/cyberway:v2.0.1|g' /var/lib/cyberway/docker-compose.yml
+sudo sed -i 's|cyberway/cyberway:stable|cyberway/cyberway:v2.0.1|g' /var/lib/cyberway/docker-compose.yml
+```
+
+3. Stop and remove old version of `nodeosd`:
+```
+sudo docker stop nodeos
+sudo docker rm nodeos
+```
+
+4. Run the new version of the `nodeos`:
+```
+cd /var/lib/cyberway
+sudo docker-compose up -d
+```
+
 # Migration of the Golos blockchain
 
 To start the transit you have to clone the contents of the repository and run `./start_check_state.sh`
