@@ -19,7 +19,7 @@ services:
 
   nodeosd:
     container_name: nodeosd
-    image: cyberway/cyberway:stable
+    image: cyberway/cyberway:v2.0.1
     depends_on:
       mongo:
         condition: service_healthy

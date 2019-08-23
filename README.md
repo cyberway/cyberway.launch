@@ -2,7 +2,7 @@
 
 # Mainnet
 
-The current CyberWay version: [v2.0.0](https://github.com/cyberway/cyberway/releases/tag/v2.0.0)
+The current CyberWay version: [v2.0.1](https://github.com/cyberway/cyberway/releases/tag/v2.0.1)
 
 # Running node
 
