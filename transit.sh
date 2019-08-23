@@ -197,9 +197,8 @@ cyberway_first_run() {
     cyberway_set_witness $CYBER_CONFIG
     cyberway_add_p2p_nodes
 
-    sed "s|\${PWD}/config.ini|$CYBER_CONFIG|g; \
-         s|\${PWD}/genesis-data|$CYBER_GENESIS|g; \
-         s|image: cyberway/cyberway:stable|image: $CYBER_IMAGE|g" <docker-compose.yml >$CYBER_COMPOSE
+    sed "s|image: cyberway/cyberway:stable|image: $CYBER_IMAGE|g" <docker-compose.yml >$CYBER_COMPOSE
+     
 
     docker stop keosd nodeosd mongo || true
     docker rm keosd nodeosd mongo || true
@@ -418,7 +417,7 @@ END
 
 goloschain_ip="127.0.0.1"
 golos_branch="v0.21.0"
-cyberway_branch="v2.0.0"
+cyberway_branch="v2.0.1"
 goloschain_name="golos-default"
 password="qwerty"
 delay_sec=300

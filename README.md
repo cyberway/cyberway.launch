@@ -15,19 +15,13 @@ Clone this repository and run `./start_light.sh`
 sudo docker pull cyberway/cyberway:v2.0.1
 ```
 
-2. In the file `/var/lib/cyberway/docker-compose.yml` update the version number of the `nodeos` container from `v2.0.0` to `v2.0.1`:
+2. Download the last version of `docker-compose.yml` from the [GitHub](https://raw.githubusercontent.com/cyberway/cyberway.launch/master/docker-compose.yml)
+
 ```
-sudo sed -i 's|cyberway/cyberway:v2.0.0|cyberway/cyberway:v2.0.1|g' /var/lib/cyberway/docker-compose.yml
-sudo sed -i 's|cyberway/cyberway:stable|cyberway/cyberway:v2.0.1|g' /var/lib/cyberway/docker-compose.yml
+sudo curl https://raw.githubusercontent.com/cyberway/cyberway.launch/master/docker-compose.yml --output /var/lib/cyberway/docker-compose.yml
 ```
 
-3. Stop and remove old version of `nodeosd`:
-```
-sudo docker stop nodeos
-sudo docker rm nodeos
-```
-
-4. Run the new version of the `nodeos`:
+3. Restart the nodeos container:
 ```
 cd /var/lib/cyberway
 sudo docker-compose up -d
