@@ -19,11 +19,11 @@ services:
 
   nodeosd:
     container_name: nodeosd
-    image: cyberway/cyberway:v2.0.1
+    image: cyberway/cyberway:v2.0.2
     depends_on:
       mongo:
         condition: service_healthy
-    command: /opt/cyberway/bin/nodeosd.sh --data-dir /opt/cyberway/bin/data-dir -e --http-alias=nodeosd:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 --genesis-json /opt/cyberway/bin/genesis-data/genesis.json --genesis-data /opt/cyberway/bin/genesis-data/genesis.dat
+    command: /opt/cyberway/bin/nodeosd.sh --data-dir /opt/cyberway/bin/data-dir -e --http-alias=nodeosd:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 --genesis-json /opt/cyberway/bin/genesis-data/genesis.json --genesis-data /opt/cyberway/bin/genesis-data/genesis.dat --revert-to-last-irreversible-block
     hostname: nodeosd
     ports:
       - 8888:8888

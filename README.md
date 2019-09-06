@@ -2,17 +2,17 @@
 
 # Mainnet
 
-The current CyberWay version: [v2.0.1](https://github.com/cyberway/cyberway/releases/tag/v2.0.1)
+The current CyberWay version: [v2.0.2](https://github.com/cyberway/cyberway/releases/tag/v2.0.2)
 
 # Running node
 
 Clone this repository and run `./start_light.sh`
 
-# Upgrade from v2.0.0 to v2.0.1
+# Upgrade from v2.0.1 to v2.0.2
 
-1. Download the docker image `cyberway/cyberway:v2.0.1`:
+1. Download the docker image `cyberway/cyberway:v2.0.2`:
 ```
-sudo docker pull cyberway/cyberway:v2.0.1
+sudo docker pull cyberway/cyberway:v2.0.2
 ```
 
 2. Download the last version of `docker-compose.yml` from the [GitHub](https://raw.githubusercontent.com/cyberway/cyberway.launch/master/docker-compose.yml)
@@ -24,7 +24,7 @@ sudo curl https://raw.githubusercontent.com/cyberway/cyberway.launch/master/dock
 3. Restart the nodeos container:
 ```
 cd /var/lib/cyberway
-sudo docker-compose up -d
+sudo docker-compose up -t 120 -d
 ```
 
 # Migration of the Golos blockchain
