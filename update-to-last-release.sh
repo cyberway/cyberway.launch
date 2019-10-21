@@ -14,5 +14,5 @@ curl "${SRC_CYBERWAY_COMPOSE}" --output "${DST_CYBERWAY_COMPOSE}"
 CYBERWAY_IMAGE=$(awk '/image: cyberway\/cyberway/ {print $2}' "${DST_CYBERWAY_COMPOSE}")
 docker pull "${CYBERWAY_IMAGE}"
 
-( cd "${CYBERWAY_DATA_PATH}"; docker-compose -p cyberway -f "${DST_CYBERWAY_COMPOSE}" up -d )
+( cd "${CYBERWAY_DATA_PATH}"; docker-compose -p cyberway -f "${DST_CYBERWAY_COMPOSE}" up -t 120 -d )
 

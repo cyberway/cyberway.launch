@@ -198,7 +198,6 @@ cyberway_first_run() {
     cyberway_add_p2p_nodes
 
     sed "s|image: cyberway/cyberway:stable|image: $CYBER_IMAGE|g" <docker-compose.yml >$CYBER_COMPOSE
-     
 
     docker stop keosd nodeosd mongo || true
     docker rm keosd nodeosd mongo || true
@@ -208,7 +207,7 @@ cyberway_first_run() {
         docker volume create --name $v
     done
 
-    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE up -d )
+    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE up -t 120 -d )
 }
 
 check_available_space() {
@@ -417,7 +416,7 @@ END
 
 goloschain_ip="127.0.0.1"
 golos_branch="v0.21.0"
-cyberway_branch="v2.0.1"
+cyberway_branch="v2.0.2"
 goloschain_name="golos-default"
 password="qwerty"
 delay_sec=300
