@@ -2,7 +2,7 @@
 
 # Mainnet
 
-The current CyberWay version: [v2.0.2](https://github.com/cyberway/cyberway/releases/tag/v2.0.2)
+The current CyberWay version: [v2.0.3](https://github.com/cyberway/cyberway/releases/tag/v2.0.3)
 
 # Migration of the Golos blockchain
 

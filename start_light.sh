@@ -2,7 +2,7 @@
 
 set -xe
 
-cyberway_branch="v2.0.2"
+cyberway_branch="v2.0.3"
 
 CYBER_IMAGE="cyberway/cyberway:$cyberway_branch"
 CYBER_ETC="/etc/cyberway"
