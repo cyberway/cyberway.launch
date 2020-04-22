@@ -2,17 +2,17 @@
 
 # Mainnet
 
-The current CyberWay version: [v2.0.3](https://github.com/cyberway/cyberway/releases/tag/v2.0.3)
+The current CyberWay version: [v2.1.0](https://github.com/cyberway/cyberway/releases/tag/v2.1.0)
 
 # Running node
 
 Clone this repository and run `./start_light.sh`
 
-# Upgrade from v2.0.2 to v2.0.3
+# Upgrade from v2.0.3 to v2.1.0
 
-1. Download the docker image `cyberway/cyberway:v2.0.3`:
+1. Download the docker image `cyberway/cyberway:v2.1.0`:
 ```
-sudo docker pull cyberway/cyberway:v2.0.3
+sudo docker pull cyberway/cyberway:v2.1.0
 ```
 
 2. Download the last version of `docker-compose.yml` from the [GitHub](https://raw.githubusercontent.com/cyberway/cyberway.launch/master/docker-compose.yml)
