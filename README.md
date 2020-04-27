@@ -24,5 +24,5 @@ sudo curl https://raw.githubusercontent.com/cyberway/cyberway.launch/master/dock
 3. Restart the nodeos container:
 ```
 cd /var/lib/cyberway
-sudo env EXTRA_NODEOS_ARGS="--replay-blockchain" docker-compose up -t 120 -d
+sudo docker-compose up -t 120 -d
 ```
