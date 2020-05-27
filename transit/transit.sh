@@ -416,7 +416,7 @@ END
 
 goloschain_ip="127.0.0.1"
 golos_branch="v0.21.0"
-cyberway_branch="v2.1.0"
+cyberway_branch="v2.1.1"
 goloschain_name="golos-default"
 password="qwerty"
 delay_sec=300
