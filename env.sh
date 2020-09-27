@@ -99,11 +99,18 @@ add_p2p_nodes() {
     done
 }
 
-cyberway_add_config() {
+cyberway_add_light_config() {
     cp config.ini $CYBER_CONFIG
     cp docker-compose.yml $CYBER_DATA
+
+    add_p2p_nodes
+}
+
+cyberway_add_full_config() {
+    cp config.ini $CYBER_CONFIG
     cp docker-compose-events.yml $CYBER_DATA
     cp -R nats $CYBER_DATA
+    cp -R mongodb-exporter $CYBER_DATA
 
     add_p2p_nodes
 }
