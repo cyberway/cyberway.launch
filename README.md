@@ -8,6 +8,10 @@ The current CyberWay version: [v2.1.1](https://github.com/cyberway/cyberway/rele
 
 Clone this repository and run `./start_light.sh`
 
+# Running full node
+
+Clone this repository and run `./start_full_node.sh`
+
 # Upgrade from v2.1.0 to v2.1.1
 
 1. Download the docker image `cyberway/cyberway:v2.1.1`:
