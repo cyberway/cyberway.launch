@@ -31,7 +31,7 @@ cyberway_mkdirs
 cyberway_check_available_space 104857600 100Gb
 cyberway_download_genesis
 cyberway_download_event_genesis
-cyberway_add_config
+cyberway_add_full_config
 
 echo "EXTRA_NODEOS_ARGS: $EXTRA_NODEOS_ARGS"
 

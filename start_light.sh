@@ -29,7 +29,7 @@ fi
 cyberway_mkdirs
 cyberway_check_available_space 10485760 10Gb
 cyberway_download_genesis
-cyberway_add_config
+cyberway_add_light_config
 
 echo "EXTRA_NODEOS_ARGS: $EXTRA_NODEOS_ARGS"
 
