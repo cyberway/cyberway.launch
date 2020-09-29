@@ -12,7 +12,7 @@ fi
 . "$script_path/env.sh"
 
 if [[ "$1" == "cleanup" ]]; then
-    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS -t 120 down || exit 1 )
+    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS down -t 120 || exit 1 )
     docker volume rm cyberway-mongodb-data
     docker volume rm cyberway-nodeos-data
     docker volume rm cyberway-queue
@@ -23,7 +23,7 @@ elif [[ "$1" == "up" ]]; then
     ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS up -t 120 -d || exit 1 )
     exit 0
 elif [[ "$1" == "down" ]]; then
-    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS -t 120 down || exit 1 )
+    ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS down -t 120 || exit 1 )
     exit 0
 fi
 
