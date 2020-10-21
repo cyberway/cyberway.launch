@@ -62,7 +62,8 @@ cyberway_download_genesis() {
     check_or_create_directory "$CYBER_GENESIS"
     [ ! -f $CYBER_GENESIS/'genesis.json' ] || [ ! -f $CYBER_GENESIS/'genesis.dat' ] || return 0
 
-    rm -rf $CYBER_GENESIS || true
+    rm -f $CYBER_GENESIS/'genesis.json' || true
+    rm -f $CYBER_GENESIS/'genesis.dat' || true
 
     local genesis_data_url=$(curl --silent $CYBER_LAUNCH_URL'/genesis-data.link')
 
