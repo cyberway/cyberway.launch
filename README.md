@@ -6,11 +6,11 @@ The current CyberWay version: [v2.1.1](https://github.com/cyberway/cyberway/rele
 
 # Running node
 
-Clone this repository and run `./start_light.sh`
+Clone this repository and run `sudo ./start_light.sh`
 
 # Running full node
 
-Clone this repository and run `./start_full_node.sh`
+Clone this repository and run `sudo ./start_full_node.sh`
 
 # Upgrade from v2.1.0 to v2.1.1
 
