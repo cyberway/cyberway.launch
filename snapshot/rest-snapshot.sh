@@ -17,7 +17,7 @@ error() {
 
 docker stop -t 120 state-reader || true
 docker stop -t 120 nodeosd || true
-./start_full_node.sh down
+./start_full_node.sh down || true
 
 docker volume rm cyberway-nodeos-data || true
 docker volume create cyberway-nodeos-data || true
