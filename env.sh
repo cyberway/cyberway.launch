@@ -9,6 +9,8 @@ CYBER_LAUNCH_URL='https://raw.githubusercontent.com/cyberway/cyberway.launch/mas
 CYBER_EVENT_GENESIS="$CYBER_GENESIS/event-genesis"
 CYBER_EVENT_GENESIS_URL="https://download.cyberway.io/ee-genesis-10-09-2019.tar.bz2"
 
+[ "$EUID" -eq 0 ] || { echo "Please run as root"; exit 1; }
+
 cyberway_check_available_space() {
     local dir=$(dirname "$CYBER_DATA")
     local avail=$(df $dir --output=avail | tail -n +2)
@@ -40,7 +42,7 @@ add_config_value() {
 
     remove_trailing_comments $key $config
 
-    if [ $(grep -cP '^[ \t]*'$key'[ \t]*=[ \t]*'$value'[ \t]*$' $config) == '0' ]; then
+    if [ $(grep -c '^[ \t]*'$key'[ \t]*=[ \t]*'$value'[ \t]*$' $config) == '0' ]; then
         sed -i '1i '$key' = '$value $config
     fi
 }

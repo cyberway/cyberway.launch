@@ -29,7 +29,7 @@ elif [[ "$1" == "down" ]]; then
 fi
 
 cyberway_mkdirs
-cyberway_check_available_space 104857600 100Gb
+cyberway_check_available_space 314572800 300Gb
 cyberway_download_genesis
 cyberway_download_event_genesis
 cyberway_add_full_config
@@ -43,7 +43,7 @@ docker volume create cyberway-nats-data || true
 
 if [[ ( -z "$NATS_USER" ) || ( -z "$NATS_PASS" ) || ( -z "$MONGODB_EXPORTER_USER" ) || ( -z "$MONGODB_EXPORTER_PASS" ) ]]; then
     if [[ -f $CYBER_DATA/.env ]]; then
-        if [[ $(grep -cP '^(MONGODB_EXPORTER|NATS)_(USER|PASS)=[\t\ ]?[^\t\ ]+' $CYBER_DATA/.env) != '4' ]]; then
+        if [[ $(grep -c '^\(MONGODB_EXPORTER\|NATS\)_\(USER\|PASS\)[\t\ ]\?=[\t\ ]\?[^\t\ ]\+' $CYBER_DATA/.env) != '4' ]]; then
             rm -f $CYBER_DATA/.env
         fi
     else
