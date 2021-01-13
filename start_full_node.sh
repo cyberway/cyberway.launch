@@ -23,7 +23,7 @@ elif [[ "$1" == "up" ]]; then
     ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS up -t 120 -d || exit 1 )
     exit 0
 elif [[ "$1" == "down" ]]; then
-    docker stop -t 120 nodeosd || true	
+    docker stop -t 120 nodeosd || true
     ( cd $CYBER_DATA; docker-compose -p cyberway -f $CYBER_COMPOSE_EVENTS down -t 120 || exit 1 )
     exit 0
 fi
