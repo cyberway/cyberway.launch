@@ -24,6 +24,6 @@ docker stop -t 120 nodeosd || true
 docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:rw -v cyberway-nodeos-data:/data:ro cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -c -Ipbzip2 -Pvf /host/nodeos.tar.bz2 /data
 docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:rw -v cyberway-mongodb-data:/data:ro cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -c -Ipbzip2 -Pvf /host/mongodb.tar.bz2 /data
 
-if [ `sudo docker volume ls -f name=cyberway-nats-data | wc -l` -eq 2 ]; then
+if [ `docker volume ls -f name=cyberway-nats-data | wc -l` -eq 2 ]; then
     docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:rw -v cyberway-nats-data:/data:ro cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -c -Ipbzip2 -Pvf /host/nats.tar.bz2 /data
 fi
