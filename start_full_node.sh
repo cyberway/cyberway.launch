@@ -43,7 +43,7 @@ docker volume create cyberway-nats-data || true
 
 if [[ ( -z "$NATS_USER" ) || ( -z "$NATS_PASS" ) || ( -z "$MONGODB_EXPORTER_USER" ) || ( -z "$MONGODB_EXPORTER_PASS" ) ]]; then
     if [[ -f $CYBER_DATA/.env ]]; then
-        if [[ $(grep -c '^\(MONGODB_EXPORTER\|NATS\)_\(USER\|PASS\)[\t\ ]\?=[\t\ ]\?[^\t\ ]\+' $CYBER_DATA/.env) != '4' ]]; then
+        if [[ $(grep -c '^\(MONGODB_EXPORTER\|NATS\)_\(USER\|PASS\)=[^\t\ ]\+' $CYBER_DATA/.env) != '4' ]]; then
             rm -f $CYBER_DATA/.env
         fi
     else
