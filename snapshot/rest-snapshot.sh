@@ -4,6 +4,7 @@ set -xe
 
 SNAPSHOT_DIR=$1
 CYBERWAY_VERSION=v2.1.1
+PBZIP2=-pbzip2
 
 error() {
    echo $1
@@ -25,12 +26,12 @@ docker volume create cyberway-nodeos-data || true
 docker volume rm cyberway-mongodb-data || true
 docker volume create cyberway-mongodb-data || true
 
-docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-nodeos-data:/data:rw cyberway/cyberway:$CYBERWAY_VERSION tar -xPvf /host/nodeos.tar.bz2
-docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-mongodb-data:/data:rw cyberway/cyberway:$CYBERWAY_VERSION tar -xPvf /host/mongodb.tar.bz2
+docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-nodeos-data:/data:rw cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -x -Ipbzip2 -Pvf /host/nodeos.tar.bz2
+docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-mongodb-data:/data:rw cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -x -Ipbzip2 -Pvf /host/mongodb.tar.bz2
 
 if [ -f "$SNAPSHOT_DIR"/nats.tar.bz2 ]; then
     docker volume rm cyberway-nats-data || true
     docker volume create cyberway-nats-data || true
 
-    docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-nats-data:/data:rw cyberway/cyberway:$CYBERWAY_VERSION tar -xPvf /host/nats.tar.bz2
+    docker run --rm -ti -v `readlink -f $SNAPSHOT_DIR`:/host:ro -v cyberway-nats-data:/data:rw cyberway/cyberway:${CYBERWAY_VERSION}${PBZIP2} tar -x -Ipbzip2 -Pvf /host/nats.tar.bz2
 fi
