@@ -39,6 +39,8 @@ docker start state-reader || true
 
 if [ -f $CYBER_COMPOSE_EVENTS ]; then
     "$script_path/start_full_node.sh"
-elif [ -f CYBER_COMPOSE ]; then
+elif [ -f $CYBER_COMPOSE ]; then
     "$script_path/start_light.sh"
+else
+    echo "No information about the node type" >&2
 fi
