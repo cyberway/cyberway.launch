@@ -9,7 +9,7 @@ else
     script_path=$(dirname $(readlink -f $0))
 fi
 
-. "$script_path/env.sh"
+. "$script_path/../env.sh"
 
 SNAPSHOT_DIR=$1
 CYBERWAY_VERSION=v2.1.1
@@ -28,9 +28,9 @@ docker stop -t 120 state-reader || true
 docker stop -t 120 nodeosd || true
 
 if [ -f $CYBER_COMPOSE_EVENTS ]; then
-    "$script_path/start_full_node.sh" down
+    "$script_path/../start_full_node.sh" down
 elif [ -f CYBER_COMPOSE ]; then
-    "$script_path/start_light.sh" down
+    "$script_path/../start_light.sh" down
 fi
 
 docker volume rm cyberway-nodeos-data || true
@@ -50,9 +50,9 @@ if [ -f "$SNAPSHOT_DIR"/nats.tar.bz2 ]; then
 fi
 
 if [ -f $CYBER_COMPOSE_EVENTS ]; then
-    "$script_path/start_full_node.sh"
+    "$script_path/../start_full_node.sh"
 elif [ -f $CYBER_COMPOSE ]; then
-    "$script_path/start_light.sh"
+    "$script_path/../start_light.sh"
 else
     echo "No information about the node type" >&2
 fi
