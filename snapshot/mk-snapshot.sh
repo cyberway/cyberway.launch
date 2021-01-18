@@ -42,5 +42,5 @@ if [ -f $CYBER_COMPOSE_EVENTS ]; then
 elif [ -f $CYBER_COMPOSE ]; then
     "$script_path/../start_light.sh"
 else
-    echo "No information about the node type" >&2
+    echo "No information about the node type"
 fi

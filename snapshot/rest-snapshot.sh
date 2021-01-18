@@ -16,7 +16,7 @@ CYBERWAY_VERSION=v2.1.1
 PBZIP2=-pbzip2
 
 error() {
-   echo $1 >&2
+   echo $1
    exit 1
 }
 
@@ -54,5 +54,5 @@ if [ -f $CYBER_COMPOSE_EVENTS ]; then
 elif [ -f $CYBER_COMPOSE ]; then
     "$script_path/../start_light.sh"
 else
-    echo "No information about the node type" >&2
+    echo "No information about the node type"
 fi
