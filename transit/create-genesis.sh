@@ -8,7 +8,7 @@ set -e
 : ${INITIAL_TIMESTAMP:=$(date +"%FT%T.%3N" --utc)}
 
 err() {
-    echo "ERROR: $*" >&2
+    echo "ERROR: $*"
     exit 1
 }
 

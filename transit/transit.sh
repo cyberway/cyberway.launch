@@ -182,7 +182,7 @@ cyberway_set_witness() {
 
         echo "INFO: Witness \"$witness\" (account \"$account\") with key $pub_key"
     else
-        echo "WARN: Witness not found" >&2
+        echo "WARN: Witness not found"
     fi
 }
 
@@ -378,7 +378,7 @@ checkarg() {
     if [ "$2" ]; then
         return 0
     else
-        echo "ERROR: $1 requires a non-empty argument" >&2
+        echo "ERROR: $1 requires a non-empty argument"
         exit 1
     fi
 }
@@ -462,7 +462,7 @@ while :; do
             exit 0
             ;;
         -?*)
-            echo "WARN: Unknown option (ignored): $1" >&2
+            echo "WARN: Unknown option (ignored): $1"
             ;;
         *)
             break
@@ -475,7 +475,7 @@ if [ "$1" ]; then
     action=$1
     shift
 else
-    echo "ERROR: Missing required action" >&2
+    echo "ERROR: Missing required action"
     exit 1
 fi
 
@@ -567,7 +567,7 @@ case $action in
         cyberway_add_p2p_nodes
         ;;
     *)
-        echo "ERROR: Unknown action $action" >&2
+        echo "ERROR: Unknown action $action"
         exit 1
 esac
 

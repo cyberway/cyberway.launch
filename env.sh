@@ -11,7 +11,7 @@ CYBER_EVENT_GENESIS_URL="https://download.cyberway.io/ee-genesis-10-09-2019.tar.
 NATS_CONFIG="${CYBER_DATA}/nats/config.conf"
 NOW_TIMESTAMP="$(date +'%Y%m%d-%H%M%S')"
 
-[ "$EUID" -eq 0 ] || { echo "Please run as root" >&2; exit 1; }
+[ "$EUID" -eq 0 ] || { echo "Please run as root"; exit 1; }
 
 cyberway_check_available_space() {
     local dir=$(dirname "$CYBER_DATA")
@@ -20,14 +20,14 @@ cyberway_check_available_space() {
     local txt_min_size=$2
 
     [ "$avail" -ge $min_size  ] || \
-    { echo "ERROR: Not enough available disk space at $1. It's need at least $2 free." >$2; exit 1; }
+    { echo "ERROR: Not enough available disk space at $1. It's need at least $2 free."; exit 1; }
 }
 
 check_or_create_directory() {
     local dir=$1
 
     mkdir -p "$dir"
-    [ -d "$dir" -a -w "$dir" ] || { echo "Directory "$dir" missing or disabled write-access" >&2; exit 1; }
+    [ -d "$dir" -a -w "$dir" ] || { echo "Directory "$dir" missing or disabled write-access"; exit 1; }
 }
 
 remove_trailing_comments() {
@@ -61,7 +61,7 @@ cyberway_mkdirs() {
 }
 
 cyberway_download_genesis() {
-    echo "Download CyberWay genesis." >&2
+    echo "Download CyberWay genesis."
 
     check_or_create_directory "$CYBER_GENESIS"
     [ ! -f $CYBER_GENESIS/'genesis.json' ] || [ ! -f $CYBER_GENESIS/'genesis.dat' ] || return 0
@@ -100,7 +100,7 @@ mk_backup() {
     local file="$1"
 
     [ ! -f "$file" ] || {
-        echo "Make backup of $file" >&2
+        echo "Make backup of $file"
         cp "$file" "${file}.${NOW_TIMESTAMP}"
     }
 }
@@ -109,8 +109,8 @@ rm_surplus_backup() {
     local file="$1"
     local backup="${file}.${NOW_TIMESTAMP}"
 
-    [ ! -f "$backup" ] || [ cmp -s "$file" "$backup" ] || {
-        echo "Remove surplus $backup" >&2
+    [ ! -f "$backup" ] || [ ! -z "$(cmp ${file} ${backup})" ] || {
+        echo "Remove surplus $backup"
         rm -f "$backup"
     }
 }
@@ -119,7 +119,7 @@ mk_config() {
     mk_backup "$CYBER_CONFIG"
     cp config.ini "$CYBER_CONFIG"
 
-    echo "Add public p2p addresses to CyberWay config" >&2
+    echo "Add public p2p addresses to CyberWay config"
 
     for ip in $(curl --silent $CYBER_LAUNCH_URL'/seednodes'); do
         [ -z "$ip" ] || add_config_value 'p2p-peer-address' $ip $CYBER_CONFIG
