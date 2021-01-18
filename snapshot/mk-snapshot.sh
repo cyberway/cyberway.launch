@@ -24,7 +24,7 @@ docker stop -t 120 nodeosd || true
 
 if [ -f $CYBER_COMPOSE_EVENTS ]; then
     "$script_path/../start_full_node.sh" down
-elif [ -f CYBER_COMPOSE ]; then
+elif [ -f $CYBER_COMPOSE ]; then
     "$script_path/../start_light.sh" down
 fi
 
