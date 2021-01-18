@@ -8,8 +8,10 @@ CYBER_COMPOSE_EVENTS="$CYBER_DATA/docker-compose-events.yml"
 CYBER_LAUNCH_URL='https://raw.githubusercontent.com/cyberway/cyberway.launch/master'
 CYBER_EVENT_GENESIS="$CYBER_GENESIS/event-genesis"
 CYBER_EVENT_GENESIS_URL="https://download.cyberway.io/ee-genesis-10-09-2019.tar.bz2"
+NATS_CONFIG="${CYBER_DATA}/nats/config.conf"
+NOW_TIMESTAMP="$(date +'%Y%m%d-%H%M%S')"
 
-[ "$EUID" -eq 0 ] || { echo "Please run as root"; exit 1; }
+[ "$EUID" -eq 0 ] || { echo "Please run as root" >&2; exit 1; }
 
 cyberway_check_available_space() {
     local dir=$(dirname "$CYBER_DATA")
@@ -18,14 +20,14 @@ cyberway_check_available_space() {
     local txt_min_size=$2
 
     [ "$avail" -ge $min_size  ] || \
-    { echo "ERROR: Not enough available disk space at $1. It's need at least $2 free."; exit 1; }
+    { echo "ERROR: Not enough available disk space at $1. It's need at least $2 free." >$2; exit 1; }
 }
 
 check_or_create_directory() {
     local dir=$1
 
     mkdir -p "$dir"
-    [ -d "$dir" -a -w "$dir" ] || { echo "Directory "$dir" missing or disabled write-access"; exit 1; }
+    [ -d "$dir" -a -w "$dir" ] || { echo "Directory "$dir" missing or disabled write-access" >&2; exit 1; }
 }
 
 remove_trailing_comments() {
@@ -59,7 +61,7 @@ cyberway_mkdirs() {
 }
 
 cyberway_download_genesis() {
-    echo "Download CyberWay genesis."
+    echo "Download CyberWay genesis." >&2
 
     check_or_create_directory "$CYBER_GENESIS"
     [ ! -f $CYBER_GENESIS/'genesis.json' ] || [ ! -f $CYBER_GENESIS/'genesis.dat' ] || return 0
@@ -94,26 +96,57 @@ cyberway_download_event_genesis() {
     export EXTRA_NODEOS_ARGS
 }
 
-add_p2p_nodes() {
-    echo "Add public p2p addresses to CyberWay config"
+mk_backup() {
+    local file="$1"
+
+    [ ! -f "$file" ] || {
+        echo "Make backup of $file" >&2
+        cp "$file" "${file}.${NOW_TIMESTAMP}"
+    }
+}
+
+rm_surplus_backup() {
+    local file="$1"
+    local backup="${file}.${NOW_TIMESTAMP}"
+
+    [ ! -f "$backup" ] || [ cmp -s "$file" "$backup" ] || {
+        echo "Remove surplus $backup" >&2
+        rm -f "$backup"
+    }
+}
+
+mk_config() {
+    mk_backup "$CYBER_CONFIG"
+    cp config.ini "$CYBER_CONFIG"
+
+    echo "Add public p2p addresses to CyberWay config" >&2
 
     for ip in $(curl --silent $CYBER_LAUNCH_URL'/seednodes'); do
         [ -z "$ip" ] || add_config_value 'p2p-peer-address' $ip $CYBER_CONFIG
     done
+
+    rm_surplus_backup "$CYBER_CONFIG"
 }
 
-cyberway_add_light_config() {
-    cp config.ini $CYBER_CONFIG
-    cp docker-compose.yml $CYBER_DATA
 
-    add_p2p_nodes
+cyberway_add_light_config() {
+    mk_config
+
+    mk_backup "$CYBER_COMPOSE"
+    cp docker-compose.yml $CYBER_DATA
+    rm_surplus_backup "$CYBER_COMPOSE"
 }
 
 cyberway_add_full_config() {
-    cp config.ini $CYBER_CONFIG
+    mk_config
+
+    mk_backup "$CYBER_COMPOSE_EVENTS"
+    mk_backup "$NATS_CONFIG"
+
     cp docker-compose-events.yml $CYBER_DATA
     cp -R nats $CYBER_DATA
     cp -R mongodb-exporter $CYBER_DATA
 
-    add_p2p_nodes
+    rm_surplus_backup "$CYBER_COMPOSE_EVENTS"
+    rm_surplus_backup "$NATS_CONFIG"
 }
